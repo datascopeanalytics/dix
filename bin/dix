@@ -11,14 +11,20 @@ import optparse
 import subprocess
 import platform
 import random
+import sys
 
 # setup the option parser
-parser = optparse.OptionParser(description=__doc__)
-parser.add_option('-p', '--precision', 
-                  dest="precision", 
-                  default=4,
-                  type="int",
-                  help="for precision measurement, set the number of decimal places to display")
+parser = optparse.OptionParser(
+    usage="%prog [options] [filename]",
+    description=__doc__,
+)
+parser.add_option(
+    '-p', '--precision', 
+    dest="precision", 
+    default=4,
+    type="int",
+    help="for precision measurement, set the number of decimal places to display"
+)
 parser.add_option('--tiny', 
                   dest="tiny", 
                   default=False,
@@ -27,11 +33,20 @@ parser.add_option('--tiny',
 
 opts, args = parser.parse_args()
 
-big_data = args[0]
+# filename is specified
+if args:
+    pipe = subprocess.Popen(
+        ["wc", "-w", args[0]], stdout=subprocess.PIPE, stdin=sys.stdin,
+    )
+    big_words = float(pipe.stdout.read().split()[0])
 
-# calculate word count
-pipe = subprocess.Popen(["wc", "-w", big_data], stdout=subprocess.PIPE)
-big_words = float(pipe.stdout.read().split()[0])
+# filename isn't specified, read from stdin instead
+else:
+    pipe = subprocess.Popen(
+        ["wc", "-w"], stdout=subprocess.PIPE, stdin=sys.stdin,
+    )
+    out, err = pipe.communicate()
+    big_words = float(out.strip())
 
 # only print emoji if they have OS X 10.7 (Lion) or above
 unit = " Moby-Dicks"
