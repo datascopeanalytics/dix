@@ -3,7 +3,7 @@
 # -*- mode: python -*-
 
 """Call me Ishmael. Dix is a utility for quantifying the size of
-plaintext data using a revolutionary metric --- comparison with the
+plaintext data using a revolutionary metric --- Moby-Dick --- the
 number of words in the classic American novel, Moby Dick.
 """
 
@@ -11,7 +11,6 @@ import optparse
 import subprocess
 import platform
 import random
-
 
 # setup the option parser
 parser = optparse.OptionParser(description=__doc__)
@@ -30,23 +29,21 @@ big_data = args[0]
 pipe = subprocess.Popen(["wc", "-w", big_data], stdout=subprocess.PIPE)
 big_words = float(pipe.stdout.read().split()[0])
 
-# print out the number of moby dicks
-
-number_template = u"{0:." + unicode(opts.precision) + u"f}"
+# use the whale unicode character if the plotform supports emoji
+unit = " Moby-Dicks"
 if "Darwin" in platform.platform():
     ver = platform.mac_ver()[0]
     point = ver.split('.')[0:2]
     # only print emoji if they have lion or above
     if int(point[1]) >= 7:
         unit = u" 🐳"
-    else:
-        unit = " Moby-Dicks"
-else:
-    unit = " Moby-Dicks"
 
+# print out the number of moby dicks
 # MD = 209117
+number_template = u"{0:." + unicode(opts.precision) + u"f}"
 print number_template.format(big_words / 209117) + unit
 
+# smack talk 
 message = random.choice((
     "Whoa, that's a lot of Moby Dick's!",
     "You call that BIG data?! Please...",
