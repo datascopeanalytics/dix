@@ -11,6 +11,7 @@ import optparse
 import subprocess
 import platform
 import random
+import sys
 
 # setup the option parser
 parser = optparse.OptionParser(
@@ -26,11 +27,20 @@ parser.add_option(
 )
 opts, args = parser.parse_args()
 
-big_data = args[0]
+# filename is specified
+if args:
+    pipe = subprocess.Popen(
+        ["wc", "-w", args[0]], stdout=subprocess.PIPE, stdin=sys.stdin,
+    )
+    big_words = float(pipe.stdout.read().split()[0])
 
-# calculate word count
-pipe = subprocess.Popen(["wc", "-w", big_data], stdout=subprocess.PIPE)
-big_words = float(pipe.stdout.read().split()[0])
+# filename isn't specified, read from stdin instead
+else:
+    pipe = subprocess.Popen(
+        ["wc", "-w"], stdout=subprocess.PIPE, stdin=sys.stdin,
+    )
+    out, err = pipe.communicate()
+    big_words = float(out.strip())
 
 # use the whale unicode character if the plotform supports emoji
 unit = " Moby-Dicks"
