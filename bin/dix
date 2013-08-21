@@ -9,6 +9,8 @@ plaintext data using a revolutionary metric: Moby-Dicks.
 import optparse
 import subprocess
 import platform
+import random
+
 
 # setup the option parser
 parser = optparse.OptionParser(description=__doc__)
@@ -42,3 +44,10 @@ else:
 
 # MD = 209117
 print number_template.format(big_words / 209117) + unit
+
+message = random.choice((
+    "Whoa, that's a lot of Moby Dick's!",
+    "You call that BIG data?! Please...",
+    "Yo' data so big, it probably won't even fit in memory!",
+))
+print(message.rjust(79))
