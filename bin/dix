@@ -2,8 +2,9 @@
 # -*- coding: utf-8 -*-
 # -*- mode: python -*-
 
-"""Call me Ishmael. Dix is a utility for quantifying large amounts of
-plaintext data using a revolutionary metric: Moby-Dicks.
+"""Call me Ishmael. Dix is a utility for quantifying the size of
+plaintext data using a revolutionary metric --- Moby-Dick --- the
+number of words in the classic American novel, Moby Dick.
 """
 
 import optparse
@@ -11,34 +12,29 @@ import subprocess
 import platform
 import random
 
-
 # setup the option parser
 parser = optparse.OptionParser(description=__doc__)
 parser.add_option('-p', '--precision', 
                   dest="precision", 
                   default=4,
                   type="int",
-                  help="Sets the number of decimal places to display")
+                  help="for precision measurement, set the number of decimal places to display")
 parser.add_option('--tiny', 
                   dest="tiny", 
                   default=False,
                   action="store_true",
-                  help="Use the Cozy Classics: Moby Dick childrens' board book as a base, to make yourself feel better")
-
+                  help="use the Cozy Classics: Moby Dick childrens' board book as a base, to make yourself feel better")
 
 opts, args = parser.parse_args()
 
 big_data = args[0]
 
 # calculate word count
-
 pipe = subprocess.Popen(["wc", "-w", big_data], stdout=subprocess.PIPE)
 big_words = float(pipe.stdout.read().split()[0])
 
-# print out the number of moby dicks
-
 # only print emoji if they have OS X 10.7 (Lion) or above
-number_template = u"{0:." + unicode(opts.precision) + u"f}"
+unit = " Moby-Dicks"
 if "Darwin" in platform.platform():
     ver = platform.mac_ver()[0]
     point = ver.split('.')[0:2]
@@ -49,19 +45,16 @@ if "Darwin" in platform.platform():
         else:
             unit = u" 🐋"
 
-    else:
-        unit = " Moby-Dicks"
-else:
-    unit = " Moby-Dicks"
-
 if opts.tiny:
     # http://www.amazon.com/Cozy-Classics-Moby-Holman-Wang/dp/1927018110
     base = 12
 else:
     base = 209117
 
+number_template = u"{0:." + unicode(opts.precision) + u"f}"
 print(number_template.format(big_words / base) + unit)
 
+# smack talk 
 message = random.choice((
     "Whoa, that's a lot of Moby Dick's!",
     "You call that BIG data?! Please...",
