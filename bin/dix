@@ -2,8 +2,9 @@
 # -*- coding: utf-8 -*-
 # -*- mode: python -*-
 
-"""Call me Ishmael. Dix is a utility for quantifying large amounts of
-plaintext data using a revolutionary metric: Moby-Dicks.
+"""Call me Ishmael. Dix is a utility for quantifying the size of
+plaintext data using a revolutionary metric --- comparison with the
+number of words in the classic American novel, Moby Dick.
 """
 
 import optparse
@@ -12,17 +13,18 @@ import random
 
 # setup the option parser
 parser = optparse.OptionParser(description=__doc__)
-parser.add_option('-p', '--precision', 
-                  dest="precision", 
-                  default=4,
-                  type="int",
-                  help="sets the number of decimal places to display")
+parser.add_option(
+    '-p', '--precision', 
+    dest="precision", 
+    default=4,
+    type="int",
+    help="for precision measurement, set the number of decimal places to display"
+)
 opts, args = parser.parse_args()
 
 big_data = args[0]
 
 # calculate word count
-
 pipe = subprocess.Popen(["wc", "-w", big_data], stdout=subprocess.PIPE)
 big_words = float(pipe.stdout.read().split()[0])
 
