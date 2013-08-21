@@ -28,13 +28,12 @@ big_words = float(pipe.stdout.read().split()[0])
 
 # print out the number of moby dicks
 # MD = 209117
-
 number_template = u"{0:." + unicode(opts.precision) + u"f}"
-print number_template.format(big_words / 209117) +  u" 🐳"
+print(number_template.format(big_words / 209117) +  u" 🐳")
 
 message = random.choice((
     "Whoa, that's a lot of Moby Dick's!",
     "You call that BIG data?! Please...",
     "Yo' data so big, it probably won't even fit in memory!",
 ))
-print message.rjust(79)
+print(message.rjust(79))
