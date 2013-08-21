@@ -36,14 +36,15 @@ parser.add_option(
 
 opts, filenames = parser.parse_args()
 
-# filename is specified
+# filenames are specified. read the last line of the output, which
+# either displays the total (for multiple files) or the number of
+# words (for single file)
 if filenames:
     pipe = subprocess.Popen(
         ["wc", "-w"]+filenames, stdout=subprocess.PIPE,
     )
-    big_words = 0
-    for line in pipe.stdout:
-        big_words += float(line.split()[0])
+    last_line = pipe.stdout.read().split('\n')[-2]
+    big_words = float(last_line.split()[0])
 
 # filename isn't specified, read from stdin instead
 else:
