@@ -18,7 +18,14 @@ parser.add_option('-p', '--precision',
                   dest="precision", 
                   default=4,
                   type="int",
-                  help="sets the number of decimal places to display")
+                  help="Sets the number of decimal places to display")
+parser.add_option('--tiny', 
+                  dest="tiny", 
+                  default=False,
+                  action="store_true",
+                  help="Use the Cozy Classics: Moby Dick childrens' board book as a base, to make yourself feel better")
+
+
 opts, args = parser.parse_args()
 
 big_data = args[0]
@@ -30,20 +37,30 @@ big_words = float(pipe.stdout.read().split()[0])
 
 # print out the number of moby dicks
 
+# only print emoji if they have OS X 10.7 (Lion) or above
 number_template = u"{0:." + unicode(opts.precision) + u"f}"
 if "Darwin" in platform.platform():
     ver = platform.mac_ver()[0]
     point = ver.split('.')[0:2]
-    # only print emoji if they have lion or above
+
     if int(point[1]) >= 7:
-        unit = u" 🐳"
+        if opts.tiny:
+            unit = u" 🐳"
+        else:
+            unit = u" 🐋"
+
     else:
         unit = " Moby-Dicks"
 else:
     unit = " Moby-Dicks"
 
-# MD = 209117
-print(number_template.format(big_words / 209117) + unit)
+if opts.tiny:
+    # http://www.amazon.com/Cozy-Classics-Moby-Holman-Wang/dp/1927018110
+    base = 12
+else:
+    base = 209117
+
+print(number_template.format(big_words / base) + unit)
 
 message = random.choice((
     "Whoa, that's a lot of Moby Dick's!",
