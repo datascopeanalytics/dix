@@ -41,7 +41,7 @@ if "Darwin" in platform.platform():
 # print out the number of moby dicks
 # MD = 209117
 number_template = u"{0:." + unicode(opts.precision) + u"f}"
-print number_template.format(big_words / 209117) + unit
+print(number_template.format(big_words / 209117) + unit)
 
 # smack talk 
 message = random.choice((
