@@ -13,7 +13,10 @@ import platform
 import random
 
 # setup the option parser
-parser = optparse.OptionParser(description=__doc__)
+parser = optparse.OptionParser(
+    usage="%prog [options] [filename]",
+    description=__doc__,
+)
 parser.add_option(
     '-p', '--precision', 
     dest="precision", 
