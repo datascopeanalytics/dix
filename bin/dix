@@ -8,6 +8,7 @@ plaintext data using a revolutionary metric: Moby-Dicks.
 
 import optparse
 import subprocess
+import platform
 
 # setup the option parser
 parser = optparse.OptionParser(description=__doc__)
@@ -26,7 +27,18 @@ pipe = subprocess.Popen(["wc", "-w", big_data], stdout=subprocess.PIPE)
 big_words = float(pipe.stdout.read().split()[0])
 
 # print out the number of moby dicks
-# MD = 209117
 
 number_template = u"{0:." + unicode(opts.precision) + u"f}"
-print number_template.format(big_words / 209117) +  u" 🐳"
+if "Darwin" in platform.platform():
+    ver = platform.mac_ver()[0]
+    point = ver.split('.')[0:2]
+    # only print emoji if they have lion or above
+    if int(point[1]) >= 7:
+        unit = u" 🐳"
+    else:
+        unit = " Moby-Dicks"
+else:
+    unit = " Moby-Dicks"
+
+# MD = 209117
+print number_template.format(big_words / 209117) + unit
