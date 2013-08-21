@@ -25,11 +25,14 @@ parser.add_option(
     type="int",
     help="for precision measurement, set the number of decimal places to display"
 )
-parser.add_option('--tiny', 
-                  dest="tiny", 
-                  default=False,
-                  action="store_true",
-                  help="use the Cozy Classics: Moby Dick childrens' board book as a base, to make yourself feel better")
+parser.add_option(
+    '--tiny', 
+    dest="tiny", 
+    default=False,
+    action="store_true",
+    help="use the 'Cozy Classics: Moby Dick' childrens' board book as a basis "\
+        +"for comparison, to make yourself feel better",
+)
 
 opts, filenames = parser.parse_args()
 
