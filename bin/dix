@@ -25,20 +25,26 @@ parser.add_option(
     type="int",
     help="for precision measurement, set the number of decimal places to display"
 )
-parser.add_option('--tiny', 
-                  dest="tiny", 
-                  default=False,
-                  action="store_true",
-                  help="use the Cozy Classics: Moby Dick childrens' board book as a base, to make yourself feel better")
+parser.add_option(
+    '--tiny', 
+    dest="tiny", 
+    default=False,
+    action="store_true",
+    help="use the 'Cozy Classics: Moby Dick' childrens' board book as a basis "\
+        +"for comparison, to make yourself feel better",
+)
 
 opts, filenames = parser.parse_args()
 
-# filename is specified
+# filenames are specified. read the last line of the output, which
+# either displays the total (for multiple files) or the number of
+# words (for single file)
 if filenames:
     pipe = subprocess.Popen(
         ["wc", "-w"]+filenames, stdout=subprocess.PIPE,
     )
-    big_words = float(pipe.stdout.read().split()[0])
+    last_line = pipe.stdout.read().split('\n')[-2]
+    big_words = float(last_line.split()[0])
 
 # filename isn't specified, read from stdin instead
 else:
