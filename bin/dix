@@ -15,7 +15,7 @@ import sys
 
 # setup the option parser
 parser = optparse.OptionParser(
-    usage="%prog [options] [filename]",
+    usage="%prog [options] [filename] [...]",
     description=__doc__,
 )
 parser.add_option(
@@ -31,12 +31,12 @@ parser.add_option('--tiny',
                   action="store_true",
                   help="use the Cozy Classics: Moby Dick childrens' board book as a base, to make yourself feel better")
 
-opts, args = parser.parse_args()
+opts, filenames = parser.parse_args()
 
 # filename is specified
-if args:
+if filenames:
     pipe = subprocess.Popen(
-        ["wc", "-w", args[0]], stdout=subprocess.PIPE, stdin=sys.stdin,
+        ["wc", "-w"]+filenames, stdout=subprocess.PIPE,
     )
     big_words = float(pipe.stdout.read().split()[0])
 
@@ -66,6 +66,8 @@ if opts.tiny:
 else:
     base = 209117
 
+# print out the number of moby dicks
+# Moby Dick has 209117 words according to Amazon
 number_template = u"{0:." + unicode(opts.precision) + u"f}"
 print(number_template.format(big_words / base) + unit)
 
