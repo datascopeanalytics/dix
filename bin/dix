@@ -38,7 +38,9 @@ if filenames:
     pipe = subprocess.Popen(
         ["wc", "-w"]+filenames, stdout=subprocess.PIPE,
     )
-    big_words = float(pipe.stdout.read().split()[0])
+    big_words = 0
+    for line in pipe.stdout:
+        big_words += float(line.split()[0])
 
 # filename isn't specified, read from stdin instead
 else:
