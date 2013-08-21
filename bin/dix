@@ -43,7 +43,7 @@ else:
     unit = " Moby-Dicks"
 
 # MD = 209117
-print number_template.format(big_words / 209117) + unit
+print(number_template.format(big_words / 209117) + unit)
 
 message = random.choice((
     "Whoa, that's a lot of Moby Dick's!",
