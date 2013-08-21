@@ -1,0 +1,32 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# -*- mode: python -*-
+
+"""Call me Ishmael. Dix is a utility for quantifying large amounts of
+plaintext data using a revolutionary metric: Moby-Dicks.
+"""
+
+import optparse
+import subprocess
+
+# setup the option parser
+parser = optparse.OptionParser(description=__doc__)
+parser.add_option('-p', '--precision', 
+                  dest="precision", 
+                  default=4,
+                  type="int",
+                  help="sets the number of decimal places to display")
+opts, args = parser.parse_args()
+
+big_data = args[0]
+
+# calculate word count
+
+pipe = subprocess.Popen(["wc", "-w", big_data], stdout=subprocess.PIPE)
+big_words = float(pipe.stdout.read().split()[0])
+
+# print out the number of moby dicks
+# MD = 209117
+
+number_template = u"{0:." + unicode(opts.precision) + u"f}"
+print number_template.format(big_words / 209117) +  u" 🐳"
