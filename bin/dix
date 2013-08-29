@@ -13,6 +13,9 @@ import platform
 import random
 import sys
 
+# colors in terminal
+failtext = '\033[91m'
+
 # setup the option parser
 parser = optparse.OptionParser(
     usage="%prog [options] [filename] [...]",
@@ -50,7 +53,10 @@ if filenames:
     pipe = subprocess.Popen(
         ["wc", "-w"]+filenames, stdout=subprocess.PIPE,
     )
-    last_line = pipe.stdout.read().split('\n')[-2]
+    try:
+        last_line = pipe.stdout.read().split('\n')[-2]
+    except IndexError:
+        sys.stderr.write(failtext + "ERROR: dix unable to count words. \nFile does not exist or unix wc utility not installed. \n\n") 
     big_words = float(last_line.split()[0])
 
 # filename isn't specified, read from stdin instead
