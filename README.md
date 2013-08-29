@@ -38,8 +38,8 @@ Examples
 You can also pipe things into dix if desired:
 
 ```$> echo “for there is no folly of the beast of the earth
-      which is not infinitely outdone by the madness of men” | dix
-```
+      which is not infinitely outdone by the madness of men” | dix```
+
 
 `dix` also supports a multitude of options. For example, if you feel bad about the size of your data, choose a smaller unit of comparison:
 
