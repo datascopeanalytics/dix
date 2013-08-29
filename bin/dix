@@ -41,7 +41,8 @@ parser.add_option(
     dest="smack", 
     default=True,
     action="store_false",
-    help="silence the rude remarks about the size of your data, when you just want the numbers."
+    help="silence the rude remarks about the size of your data, when you can't"\
+        +" handle the heat."
 )
 
 opts, filenames = parser.parse_args()
