@@ -24,7 +24,7 @@ Installation
 
 **Prerequisites: Python 2.6+, [wc](http://en.wikipedia.org/wiki/Wc_) (which is included on most *nix OSs)**
 
-Run `sudo pip install dix` to install dix from PyPI (`dix` needs sudo access so that it can add itself to your path for convenient running from anywhere).
+Run `sudo pip install dix` to install dix from PyPI (`dix` needs sudo access to set permissions so you can run it from anywhere).
 
 More installation options coming soon.
 
