@@ -33,6 +33,13 @@ parser.add_option(
     help="use the 'Cozy Classics: Moby Dick' childrens' board book as a basis "\
         +"for comparison, to make yourself feel better",
 )
+parser.add_option(
+    '-u', '--unopinionated', 
+    dest="smack", 
+    default=True,
+    action="store_false",
+    help="silence the rude remarks about the size of your data, when you just want the numbers."
+)
 
 opts, filenames = parser.parse_args()
 
@@ -78,9 +85,10 @@ number_template = u"{0:." + unicode(opts.precision) + u"f}"
 print(number_template.format(big_words / base) + unit)
 
 # smack talk 
-message = random.choice((
-    "Whoa, that's a lot of Moby Dick's!",
-    "You call that BIG data?! Please...",
-    "Yo' data so big, it probably won't even fit in memory!",
-))
-print(message.rjust(79))
+if opts.smack:
+    message = random.choice((
+        "Whoa, that's a lot of Moby Dick's!",
+        "You call that BIG data?! Please...",
+        "Yo' data so big, it probably won't even fit in memory!",
+    ))
+    print(message.rjust(79))
