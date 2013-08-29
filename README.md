@@ -1,7 +1,7 @@
 dix
 ===
 
->Call me Ishmael. Dix is a utility for quantifying large amounts of plaintext data using everyone's favorite metric: Moby-Dicks.
+Call me Ishmael. Dix is a utility for quantifying large amounts of plaintext data using a revolutionary metric: Moby-Dicks.
 
 Motivation
 ----------
@@ -19,6 +19,33 @@ About
 ![Moby Dick is a sizeable book.](http://i.imgur.com/OCpXRf2.jpg)
 
 
+Installation
+------------
+
+**Prerequisites: Python 2.6+, [wc](http://en.wikipedia.org/wiki/Wc_) (which is included on most *nix OSs)**
+
+Run `pip install dix` to install dix from PyPI. More installation options coming soon.
+
+
 Examples
 --------
-Coming soon...
+`dix` is run from the command line on a plaintext file, as follows.
+
+`$> dix text.txt`
+
+You can also pipe things into dix if desired:
+
+`$> echo “for there is no folly of the beast of the earth which is not infinitely outdone by the madness of men” | dix`
+
+`dix` also supports a multitude of options. For example, if you feel bad about the size of your data, choose a smaller unit of comparison:
+
+`$> dix --tiny text.txt`
+
+You can see all the options and how to use them by calling `dix -h`.
+
+
+Contribution
+------------
+
+We welcome issues and pull requests if you find problems with dix or want to enhance it! You can also reach its creators at dix.heads@datascopeanaytics.com.
+
