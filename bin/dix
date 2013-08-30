@@ -89,7 +89,8 @@ else:
 # print out the number of moby dicks
 # Moby Dick has 209117 words according to Amazon
 number_template = u"{0:." + unicode(opts.precision) + u"f}"
-print(number_template.format(big_words / base) + unit)
+s = number_template.format(big_words / base) + unit
+print(s.encode('utf-8'))
 
 # smack talk 
 if opts.smack:
