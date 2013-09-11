@@ -46,6 +46,22 @@ You can also pipe things into dix if desired:
 
 You can see all the options and how to use them by calling `dix -h`.
 
+### Advanced usage ###
+
+You can also redirect the output of dix. For example, pipe `dix` to `cowsay` for a more pleasing visual experience:
+
+`$> curl -s 'http://en.wikipedia.org/w/api.php?action=query&prop=revisions&rvsection=0&titles=Moby-Dick&rvprop=content&format=json' | python -m json.tool | grep "*" | dix | cowsay`
+
+     ____________________________________ 
+    / 0.0022 Moby-Dicks                  \
+    |                                    |
+    \ You call that BIG data?! Please... /
+     ------------------------------------ 
+            \   ^__^
+             \  (oo)\_______
+                (__)\       )\/\
+                    ||----w |
+                    ||     ||
 
 Contribution
 ------------
