@@ -82,5 +82,6 @@ message = random.choice((
     "Whoa, that's a lot of Moby Dick's!",
     "You call that BIG data?! Please...",
     "Yo' data so big, it probably won't even fit in memory!",
+    "Will your data even fit in Excel? http://bit.ly/14qjKjA",
 ))
 print(message.rjust(79))
