@@ -37,6 +37,13 @@ parser.add_option(
         +"for comparison, to make yourself feel better",
 )
 parser.add_option(
+    '--disks', 
+    dest="disks", 
+    default=False,
+    action="store_true",
+    help="c'mon! I measure my data in floppy disks, not in novel units.",
+)
+parser.add_option(
     '-u', '--unopinionated', 
     dest="smack", 
     default=True,
@@ -77,12 +84,19 @@ if "Darwin" in platform.platform():
     if int(point[1]) >= 7:
         if opts.tiny:
             unit = u" 🐳"
+        elif opts.disks:
+            unit = u" 💾"
         else:
             unit = u" 🐋"
 
 if opts.tiny:
     # http://www.amazon.com/Cozy-Classics-Moby-Holman-Wang/dp/1927018110
     base = 12
+elif opts.disks:
+    # measured as if entire disk was full of words and spaces between them
+    # http://wiki.answers.com/Q/How_much_data_can_a_3.5_inch_floppy_disk_hold
+    # http://www.wolframalpha.com/input/?i=average+english+word+length
+    base = 1.44 * 1024 * 1024 / (5.1 + 1)
 else:
     base = 209117
 
