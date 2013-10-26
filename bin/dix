@@ -54,6 +54,12 @@ parser.add_option(
 
 opts, filenames = parser.parse_args()
 
+# can only specify one of --tiny or --disks
+if opts.tiny and opts.disks:
+    parser.error(
+        "Whoa there; you can't have --tiny --disks. Try one or the other"
+    )
+
 # filenames are specified. read the last line of the output, which
 # either displays the total (for multiple files) or the number of
 # words (for single file)
